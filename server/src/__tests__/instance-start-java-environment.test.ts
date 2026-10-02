@@ -167,8 +167,9 @@ describe('实例启动时的 Java 环境注入', () => {
     await waitFor(() => terminalManager.handleInputCalls.length > 0)
 
     // Windows 需要 .\ 前缀（PowerShell 不从当前目录解析命令），Linux/Mac 需要 ./ 前缀
+    // 工作目录里该平台实际存在的脚本：Windows 是 start.bat，Linux/Mac 是 run.sh
     expect(terminalManager.handleInputCalls[0].data).toBe(
-      os.platform() === 'win32' ? '.\\start.bat\r' : './start.sh\r'
+      os.platform() === 'win32' ? '.\\start.bat\r' : './run.sh\r'
     )
   })
 
